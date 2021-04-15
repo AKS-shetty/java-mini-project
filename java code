@@ -1,0 +1,461 @@
+import java.awt.ActiveEvent;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.Locale;
+import java.util.Scanner;
+
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+
+import com.sun.tools.javac.util.List;
+//to read .txt file and store it in array
+class booking {
+	File file=new File("booking.txt");
+	public String b[]=new String[7];
+	int i=0;
+	
+	String data="";
+	String m;
+	public booking(){
+		
+		
+		FileReader x;
+		try {
+			x = new FileReader(this.file);
+			Scanner y =new Scanner(x);
+			
+		while(y.hasNext()) 
+		{
+			
+			y.useDelimiter("\n");
+				String s=y.next();
+				data=data+s+"\n";
+			
+				b[i]=s;
+			i++;
+			}
+				
+		
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	
+}
+}
+public class abc extends JFrame {
+	File file=new File("booking.txt");
+	Date dc=new Date(); //TO GET CURRENT DATE
+	DateFormat da=DateFormat.getDateInstance(DateFormat.LONG,Locale.UK);
+	 String x= da.format(dc);
+	JButton book,search,vacc;
+	JLabel l,bg,wl,wl2,wl3;
+	abc(){
+		Image i=Toolkit.getDefaultToolkit().createImage("dove.png");
+		bg=new JLabel(new ImageIcon(i));
+		add(bg);
+		setSize(1200,660);
+		bg.setLayout(null);
+		wl=new JLabel();
+		wl.setFont(new Font("Segoe Print",Font.BOLD,24));
+		wl.setText("**Welcome!! to Hotel Room Reservation Service**");
+		wl.setBounds(295,200,600,30);
+		wl2=new JLabel();
+		wl2.setFont(new Font("Segoe Print",Font.BOLD,24));
+		wl2.setText("**Welcome!! to Hotel Room Reservation Service**");
+		wl2.setBounds(297,202,600,30);
+		wl2.setForeground(Color.LIGHT_GRAY);
+		bg.add(wl);
+		bg.add(wl2);
+		wl3=new JLabel();
+		wl3.setFont(new Font("Segoe Print",Font.BOLD,24));
+		wl3.setText("------------------------------------");
+		wl3.setBounds(316,225,600,30);
+		bg.add(wl3);
+		l=new JLabel("WELCOME");bg.add(l);
+		l.setBounds(500,100,200, 50);
+		l.setBorder(BorderFactory.createLineBorder(Color.black,3));
+		l.setOpaque(true);
+		l.setBackground(Color.white);
+		l.setFont(new Font("Ink Free",Font.BOLD,30));
+		l.setForeground(Color.black);l.setHorizontalAlignment(JLabel.CENTER);
+		l.setVerticalAlignment(JLabel.CENTER);
+		
+		vacc=new JButton("View");
+		book=new JButton("Booking");
+		search=new JButton("Search");
+    
+		book.setBounds(550,417,100,50);
+		vacc.setBounds(550,478,100, 50);
+		search.setBounds(550,539 , 100, 50);
+    
+		vacc.setFont(new Font("Airel",Font.ITALIC,14));
+		search.setFont(new Font("Airel",Font.ITALIC,14));
+		book.setFont(new Font("Airel",Font.ITALIC,14));
+    
+		book.setBorder(BorderFactory.createEtchedBorder());
+		vacc.setBorder(BorderFactory.createEtchedBorder());
+		search.setBorder(BorderFactory.createEtchedBorder());
+    
+		bg.add(book);
+		bg.add(vacc);
+		bg.add(search);
+		setVisible(true);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    
+    //WHEN BOOKING BUTTON IS PRESSED
+		book.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				JFrame j=new JFrame("Booking sevice");
+				
+				j.pack();
+				j.setSize(900,900);
+				j.setLayout(null);
+				j.setVisible(true);
+				j.setDefaultCloseOperation(j.DISPOSE_ON_CLOSE);
+				j.getContentPane().setBackground(Color.green);
+				JLabel l1=new JLabel("Name :");
+				l1.setFont(new Font("Gabriola",Font.PLAIN,24));
+				l1.setVerticalAlignment(JLabel.CENTER);;
+				l1.setBounds(293,10,70,35 );
+				l1.setVerticalTextPosition(JLabel.BOTTOM);
+				j.add(l1);
+				JTextField t1=new JTextField(40);
+				t1.setFont(new Font("Javanese Text",Font.PLAIN,15));
+				t1.setBounds(369,10,250,25);
+				j.add(t1);
+				JLabel l2=new JLabel("Select the room no.:");
+				l2.setFont(new Font("Gabriola",Font.PLAIN,24));
+				l2.setBounds(203,45,200,35 );
+				j.add(l2);
+				JComboBox<String> c=new JComboBox<String>();
+				c.addItem("---");
+				c.addItem("101");
+				c.addItem("102");
+				c.addItem("103");
+				c.addItem("201");
+				c.addItem("202");
+				c.addItem("203");
+				c.setBounds(305, 180,50,30);
+				JPanel jp=new JPanel();
+				jp.add(c);
+				JLabel ll=new JLabel("");
+				jp.add(ll);
+				c.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent ee) {
+						String r1=(String) c.getSelectedItem();
+						booking q=new booking();
+						
+						int j;
+						for(j=1;j<7;j++) {
+							String[] s=q.b[j].split(",");
+							if(s[0].equals(r1)) {
+								if(s[3].contentEquals("n")) {
+									ll.setText("Vaccant");
+								}
+								else
+									ll.setText("not Vaccant");
+							}
+						}
+						
+					}
+				});
+				JTabbedPane jtp=new  JTabbedPane();
+				jtp.addTab("Select room", jp);
+				
+				j.add(jtp);
+				jtp.setBounds(408, 45,200,60);
+				JButton sub=new JButton("OK");
+				sub.setBounds(410,120,80,40);
+				j.add(sub);
+				JTextField t2=new JTextField();
+				t2.setBounds(328,270,350,30);
+				t2.setEditable(false);
+				JTextField t3=new JTextField();
+				t3.setBounds(328,300,350,30);
+				t3.setBorder(null);t2.setBorder(null);
+				t3.setEditable(false);
+				JTextField t4=new JTextField();
+				t4.setBounds(328,330,350,30);
+				t4.setEditable(false);
+				t4.setBorder(null);
+				JTextField t5=new JTextField();
+				t5.setBounds(328,360,350,30);
+				t5.setEditable(false);
+				t5.setBorder(null);
+				j.add(t2);
+				j.add(t3);
+				j.add(t4);
+				j.add(t5);
+				t2.setFont(new Font("Airel",Font.PLAIN,20));
+				t3.setFont(new Font("Airel",Font.PLAIN,18));
+				t4.setFont(new Font("Airel",Font.PLAIN,18));
+				t5.setFont(new Font("Airel",Font.PLAIN,18));
+				sub.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent aa) {
+						String na= t1.getText();
+						na=na.toUpperCase();
+						t2.setText("Details:");
+						t3.setText("Name              :  "+na);
+						t4.setText("Room number :  "+c.getSelectedItem());
+						t5.setText("Date               :  "+x);
+						
+					}
+				});
+				
+				JButton be=new JButton("Submit");
+				j.add(be);
+				
+				
+				be.setBounds(405,500,85,40);
+				be.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent ea) {
+						booking xz=new booking(); //UPDATING .txt FILE AFTER RESERVATION
+						String ro,nm,lt;
+						lt=ll.getText();
+						ro="";
+						String result="";
+						ro=(String) c.getSelectedItem();
+						nm=t1.getText();
+						if(nm.isBlank() || ro.equals("---") || ro.isBlank() || lt.equals("not Vaccant")) {
+							JOptionPane.showMessageDialog(be, "Please!! enter the proper information","ERROR!!!",JOptionPane.ERROR_MESSAGE);
+							
+						}
+						else
+						{int j;
+						for(j = 1;j<7;j++) {
+							String[] y=xz.b[j].split(",");
+							if(y[0].equals(ro)) {
+								String[] z=xz.b[j+1].split(",");
+								String m=z[0];
+								result=result+(xz.data.substring(0,(xz.data.indexOf(ro))+4)+x+","+nm+","+"a,:\n"+xz.data.substring(xz.data.indexOf(m)));
+								
+								
+								try {
+									FileWriter w=new FileWriter(file);
+									w.write(result);
+									w.close();
+								} catch (IOException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+								
+								
+								
+							
+							}
+						}
+						JOptionPane.showMessageDialog(be, "  Thank You!!\nYour reservation is successful");
+						t1.setText("");
+						t2.setText("");
+						t3.setText("");
+						t4.setText("");
+						t5.setText("");
+						}
+					}
+				});
+				
+				
+			}
+		});
+		vacc.addActionListener(new ActionListener() { //TO VIEW THE DETAILS OF CUSTOMER IN TABULAR FORMAT
+			public void actionPerformed(ActionEvent xy) {
+				booking v=new booking();
+				String[] head=v.b[0].split(",");
+				String[][] Rd=new String[6][4];
+				for(int i =0;i < 6; i++) {
+					Rd[i]=v.b[i+1].split(",");
+				}
+				
+				
+				JFrame t=new JFrame("View");
+				JTable table=new JTable(Rd,head);
+				JLabel l=new JLabel("Customer Details");
+				t.add(l);
+				l.setBounds(350,20,200,30);
+				l.setFont(new Font("Airel",Font.BOLD,23));
+				table.setRowHeight(30);
+				JScrollPane sp=new JScrollPane(table);
+				table.setSize(300,300);
+				sp.setBounds(140, 100, 600, 250);
+				table.setFont(new Font("MV Boli",Font.PLAIN,14));
+				table.getTableHeader().setFont(new Font("MV Boli",Font.BOLD,20));
+				table.getTableHeader().setBackground(Color.orange);
+				table.setBorder(BorderFactory.createLineBorder(Color.red, 1));
+				table.setGridColor(Color.black);
+				table.setEnabled(false);
+				t.add(sp);
+				t.setLayout(null);
+				t.setSize(900,600);
+				t.setDefaultCloseOperation(t.DISPOSE_ON_CLOSE);
+				t.setVisible(true);
+				t.getContentPane().setBackground(new Color(0,0,250,50)); //R,G,B and alpha
+			}
+		});
+    
+    //TO SEARCH DETAILS ABOUT A ROOM USING ROOM NO.
+		search.addActionListener(new ActionListener() { 
+			public void actionPerformed(ActionEvent se) {
+				JFrame js= new JFrame("Search");
+				js.setLayout(null);
+				js.setDefaultCloseOperation(js.DISPOSE_ON_CLOSE);
+				js.setVisible(true);
+				js.setSize(700, 700);
+				Image mag=Toolkit.getDefaultToolkit().createImage("magni.png");
+				JLabel ls=new JLabel(new ImageIcon(mag));
+				ls.setBounds(100,30,60, 60);
+				JLabel l9=new JLabel("Enter the Room no.  :");
+				l9.setFont(new Font("Gabriola",Font.BOLD,24));
+				l9.setBounds(162,40,200,35);
+				JTextField ts =new JTextField();
+				ts.setFont(new Font("Airel",Font.PLAIN,18));
+				ts.setBounds(353, 37, 150, 30);
+				js.add(ts);
+				js.add(l9);
+				js.add(ls);
+				JButton sb=new JButton("Search!");
+				sb.setBounds(300,120, 100, 50);
+				sb.setFont(new Font("Airel",Font.ITALIC,14));
+				JTextField sr1 =new JTextField();
+				JTextField sr2 =new JTextField();
+				JTextField sr3 =new JTextField();
+				JTextField sr4 =new JTextField();
+				JTextField sr5 =new JTextField();
+				sr1.setEditable(false);
+				sr1.setOpaque(true);
+				sr1.setBackground(Color.white);
+				sr1.setBounds(160,205,364,50);
+				sr1.setVisible(false);
+				sr1.setForeground(Color.RED);
+				sr1.setFont(new Font("Airel",Font.BOLD,24));
+				sr1.setText("");
+				js.add(sr1);
+				sr2.setEditable(false);
+				sr2.setOpaque(true);
+				sr2.setBackground(Color.white);
+				sr2.setBounds(160,255,364,50);
+				sr2.setVisible(false);
+				sr2.setForeground(Color.RED);
+				sr2.setFont(new Font("Airel",Font.PLAIN,20));
+				sr2.setText("");
+				js.add(sr2);
+				sr3.setEditable(false);
+				sr3.setOpaque(true);
+				sr3.setBackground(Color.white);
+				sr3.setBounds(160,305,364,50);
+				sr3.setVisible(false);
+				sr3.setForeground(Color.RED);
+				sr3.setFont(new Font("Airel",Font.PLAIN,20));
+				sr3.setText("");
+				js.add(sr3);
+				sr4.setEditable(false);
+				sr4.setOpaque(true);
+				sr4.setBackground(Color.white);
+				sr4.setBounds(160,350,364,50);
+				sr4.setVisible(false);
+				sr4.setForeground(Color.RED);
+				sr4.setFont(new Font("Airel",Font.PLAIN,20));
+				sr4.setText("");
+				js.add(sr4);
+				sr5.setEditable(false);
+				sr5.setOpaque(true);
+				sr5.setBackground(Color.white);
+				sr5.setBounds(160,400,364,50);
+				sr5.setVisible(false);
+				sr5.setForeground(Color.RED);
+				sr5.setFont(new Font("Airel",Font.PLAIN,20));
+				
+				js.add(sr5);
+				js.add(sb);
+				sr1.setBorder(null);
+				sr2.setBorder(null);
+				sr3.setBorder(null);
+				sr4.setBorder(null);
+				sr5.setBorder(null);
+				sb.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent xx) {
+						String rn=ts.getText();
+						sr5.setText("");
+						sr4.setText("");
+						sr3.setText("");
+						sr2.setText("");
+						sr1.setText("");
+						booking o=new booking();
+						int Flag=0;
+						for(int i=1;i<7;i++) {
+							String s[]=o.b[i].split(",");
+							if(s[0].equals(rn)) {
+								Flag=1;String sh="";
+								sr1.setVisible(true);sr1.setHorizontalAlignment(sr5.CENTER);
+								sr2.setVisible(true);sr2.setHorizontalAlignment(sr5.CENTER);
+								sr3.setVisible(true);sr3.setHorizontalAlignment(sr5.CENTER);
+								sr4.setVisible(true);sr4.setHorizontalAlignment(sr5.CENTER);
+								sr5.setVisible(true);
+								sr1.setText("Result:");
+								sr2.setText("Room number : "+s[0]);
+								sr3.setText("Name of Customer : "+s[2]);
+								sr4.setText("Reservation date : "+s[1]);
+								if(s[3].equals("n")) {
+									sh=sh+("\nVaccancy : Vaccant");
+								}
+								else
+									sh=sh+("\nVaccancy : Not Vaccant");
+								sr5.setText(sh);
+								sr5.setHorizontalAlignment(sr5.CENTER);
+							}
+						}
+						if(Flag!=1) {
+							sr3.setVisible(true);
+							
+							sr3.setText("!!ENTER A PROPER ROOM NUMBER!!");
+							sr3.setHorizontalAlignment(sr3.CENTER);
+						}
+					}
+				});
+				
+			}
+		});
+
+		
+	}
+	
+	
+	
+		
+	
+	public static void main(String args[]) {
+		new abc();
+	}
+	
+}
