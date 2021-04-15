@@ -332,7 +332,7 @@ public class abc extends JFrame {
 				js.setDefaultCloseOperation(js.DISPOSE_ON_CLOSE);
 				js.setVisible(true);
 				js.setSize(700, 700);
-				Image mag=Toolkit.getDefaultToolkit().createImage("magni.png");
+				Image mag=Toolkit.getDefaultToolkit().createImage("magni.png"); //USING MAGNIFIER IMAGE
 				JLabel ls=new JLabel(new ImageIcon(mag));
 				ls.setBounds(100,30,60, 60);
 				JLabel l9=new JLabel("Enter the Room no.  :");
