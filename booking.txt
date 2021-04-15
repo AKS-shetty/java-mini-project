@@ -1,0 +1,7 @@
+room,Date,Name,Vaccancy
+101,16 May 2020,Emma,a,:
+102,15 April 2021,john,a,:
+103,15 May 2020,Carter,a,:
+201,-,-,n,:
+202,-,-,n,:
+203,-,-,n,:
